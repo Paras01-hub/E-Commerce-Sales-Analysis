@@ -1,4 +1,4 @@
-# E-Commerce-Sales-Analysis
+# E-Commerce Sales Analysis
 
 This project involves analyzing an e-commerce dataset to uncover valuable insights about sales and profit trends. Using Python and its data analysis libraries, the analysis focuses on time-based metrics to help businesses understand their performance across different periods.
 
@@ -26,20 +26,49 @@ This project involves analyzing an e-commerce dataset to uncover valuable insigh
 - **Matplotlib/Seaborn**: For data visualization.
 - **Jupyter Notebook**: For organizing and presenting the workflow.
 
-## How to Use
-1. Clone the repository:
-   ```bash
-   git clone <repository-link>
-   ```
-2. Install the required dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Open the Jupyter Notebook:
-   ```bash
-   jupyter notebook e-commerce-sales-analysis.ipynb
-   ```
-4. Follow the steps in the notebook to reproduce the analysis and visualize the insights.
+## Code for Key Questions
+
+### 1. Monthly Sales Trends
+```python
+# Convert order date to datetime
+orders['order_date'] = pd.to_datetime(orders['order_date'])
+
+# Extract year and month from order date
+orders['year_month'] = orders['order_date'].dt.to_period('M')
+
+# Group by year_month and calculate total sales
+monthly_sales = orders.groupby('year_month')['sales'].sum()
+
+# Plot the sales trend
+monthly_sales.plot(kind='line', title='Monthly Sales Trends', xlabel='Month', ylabel='Total Sales')
+plt.show()
+```
+
+### 2. Profit Analysis by Time Periods
+```python
+# Add a profit column
+orders['profit'] = orders['sales'] - orders['cost']
+
+# Group by year and calculate total profit
+yearly_profit = orders.groupby(orders['order_date'].dt.year)['profit'].sum()
+
+# Plot the profit trend
+yearly_profit.plot(kind='bar', title='Yearly Profit Analysis', xlabel='Year', ylabel='Total Profit')
+plt.show()
+```
+
+### 3. Order Patterns
+```python
+# Extract day of the week from order date
+orders['day_of_week'] = orders['order_date'].dt.day_name()
+
+# Group by day of the week and count orders
+order_patterns = orders['day_of_week'].value_counts()
+
+# Plot the order patterns
+order_patterns.plot(kind='bar', title='Orders by Day of the Week', xlabel='Day', ylabel='Number of Orders')
+plt.show()
+``` 
 
 ## Insights
 - Monthly sales trends reveal peak seasons for e-commerce performance.
@@ -53,4 +82,3 @@ The dataset used in this project is structured and contains information about or
 This analysis demonstrates the power of Python for analyzing e-commerce data. By understanding trends and patterns in sales and profit, businesses can make data-driven decisions to improve their performance and growth.
 
 Feel free to explore and expand this project with additional datasets or analysis methods!
-
