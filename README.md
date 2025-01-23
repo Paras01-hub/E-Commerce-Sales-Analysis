@@ -81,4 +81,4 @@ The dataset used in this project is structured and contains information about or
 ## Conclusion
 This analysis demonstrates the power of Python for analyzing e-commerce data. By understanding trends and patterns in sales and profit, businesses can make data-driven decisions to improve their performance and growth.
 
-Feel free to explore and expand this project with additional datasets or analysis methods!
+
